@@ -15,12 +15,15 @@ def BasicGeneration(userPrompt):
     # completion = openai.ChatCompletion.create(model="gpt-4",messages=[{"role":"user","content":inputPrompt}])
     return completion.choices[0].message.content
 
-@app.route('/generate', methods=['POST'])
+@app.route('/generate', methods=['POST', 'GET'])
 def generate_story():
-    data = request.get_json()
-    user_prompt = data.get('prompt')
-    response = BasicGeneration(user_prompt)
-    return jsonify({"response": response})
+    if request.method == 'POST':
+        data = request.get_json()
+        user_prompt = data.get('prompt')
+        response = BasicGeneration(user_prompt)
+        return jsonify({"response": response})
+    else:
+        return jsonify({"message": "Welcome to the Storytelling API! Send a POST request with 'prompt' parameter to generate a story."})
 
 # if __name__ == '__main__':
 #     app.run(debug=True)
