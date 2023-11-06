@@ -6,7 +6,7 @@ import os
 
 app = Flask(__name__)
 
-os.environ['OPENAI_API_KEY'] = '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'
+os.environ['OPENAI_API_KEY'] = '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'
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def BasicGeneration(userPrompt):
